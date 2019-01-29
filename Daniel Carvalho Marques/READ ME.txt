@@ -1,0 +1,11 @@
+IMPORTANT - extract the files from the zip before running the programming component. Do not try to run the game without extracting first.
+
+
+
+The programming component only requires the arrow keys to be played, with each arrow corresponding to a side of the screen.
+In the behaviour tutorial I had the cubes being spawned manually with button presses, but for this I have made a game master script which spawns the cubes automaticaly.
+
+Inside the scripts folder there is a scene02 folder (which has the most recent scripts) and some scripts outside the scene02 folder (which are old scripts).
+Sample scene is a default unity scene - ignore.
+Scene 01 is a test scene - ignore.
+Scene 02 is the scene which has the component to be played.
