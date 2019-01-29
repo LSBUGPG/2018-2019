@@ -1,0 +1,1 @@
+Objective is to guide the block on bottom left to the right press space to spawn a ball from the moving object.
