@@ -1,0 +1,11 @@
+Programming Task Log
+
+Date | Start | End | Interruptions | Time (H) | Task
+-----|-------|-----|---------------|----------|-----
+18/11/18 | 17:03 | 18:15 | - | 0.00 | tutorials- problems with code 
+19/11/18 | 17:20 | 18:30 | - | 0.20 | tutorials
+19/11/18 | 19:05 | 19:10 | - | 0.15| Create pick up project
+19/11/18 | 19:12 | 19:25 | - | 0.10 | wiritng code
+19/11/18 | 19:46 | 19:50 | - | 0.05 | Test the code
+19/11/18 | 20:45 | 21:18 | - | 0.10 | Write up tutorial
+

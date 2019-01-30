@@ -1,0 +1,9 @@
+Journal
+
+5/11/18
+
+Again i wanted to make a better script for movemnt then the first move script i made. I wanted this one to go with the frist person view 
+
+
+I found a really helpful tutorial that helped me making a good movement script. One that really worked well combined with the looking script. 
+I think when combined with the looking scrpit works really well and i think i will use them for my game. 

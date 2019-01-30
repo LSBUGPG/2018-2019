@@ -1,0 +1,8 @@
+Journal
+
+30/10/18
+
+I wanted to make a better sciprt for looking then the last sciprt as it was just a carama looking at the player script. I wanted to make one from a frist person view point. 
+I looked at a few tutorials not finding them to be that good but then i came across one that worked with what i wanted. 
+
+I think it really works well with what i wanted. 

@@ -1,0 +1,130 @@
+How to be build a working flashlight tutorial hud 
+
+This tutorial will show how to build a working flashlight hud. From picking up batterys and having a hud showing them draning and how many batterys the player has. 
+
+## 1. create a new scene (make a floor with a object) 
+
+## 2. create a create an empty gameobject rename it to player and add component character controller.
+
+## 3. Then add a camara to the player by right clicking on player and renaming it Playercamera
+
+## 4. add playermove and playerlook scrpts to the player and camera. 
+
+## 5 use the assets with a flashlight and batterys placing them in the sence adding box colliers to both and triggering both 
+
+## 6. First we should set up the Hud. Make a scrpit and call it HUD - this will show that the battery count is and how many batterys the player has. 
+
+public class HUD : MonoBehaviour
+{
+    public static int BatteryCount;
+    public static bool HasFlashlight;
+
+    void OnGUI()
+    {
+        if (HasFlashlight)
+        {
+            GUI.Label(new Rect(10, 10, 80, 30), "Flashlight");
+            GUI.Label(new Rect(70, 10, 80, 30), Flashlight.BatteryLife.ToString("F2"));
+        }
+        GUI.Label(new Rect(10, 40, 80, 30), "Batteries");
+        GUI.Label(new Rect(70, 40, 80, 30), BatteryCount.ToString());
+    }
+}
+
+Once having saved this to the script go back to unity and attach the scipt to the floor of the scene - run the game and battery - 0 should appear in the top left of the screen. 
+
+## 7. The next step is setting up the pick up scrpit - this script will be put on the battery and the flashlight  
+
+
+public class PickUp : MonoBehaviour
+{
+    public GameObject children;
+    public enum Item
+    {
+        Flashlight,
+        Battery
+    }
+    public Item item;
+    void OnTriggerEnter()
+    {
+        if (item == Item.Flashlight)
+        {
+
+            
+
+            HUD.HasFlashlight = true;
+        }
+        else
+            HUD.BatteryCount++;
+
+        Destroy(gameObject);
+    }
+}
+
+in unity now looking at the inspector making sure the script item says the battery is set to battery and the flash light is set to flashlight 
+
+
+## 8.  The next step is to make a script for the flashlight and to asign a key for it to work. Here i made the ket E.
+
+
+
+public class Flashlight : MonoBehaviour
+{
+    public static float BatteryLife = 100;
+    public static GameObject HeadlightMount;
+    public Light HeadLight;
+    public float BatteryReductionSpeed = 3.0f;
+
+    void Awake()
+    {
+
+        HeadlightMount = GameObject.FindWithTag("Headlamp");
+
+        HeadlightMount.SetActive(false);
+
+        HeadLight.enabled = false;
+    }
+    void Update()
+    {
+        if (HeadLight.enabled)
+        {
+            BatteryLife = BatteryLife - (BatteryReductionSpeed * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(KeyCode.E) && HUD.HasFlashlight && !HeadLight.enabled && HUD.BatteryCount > 0)
+        {
+            if (BatteryLife <= 0 && HUD.BatteryCount > 0)
+            {
+                HUD.BatteryCount--;
+                BatteryLife = 100;
+            }
+            HeadLight.enabled = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && HUD.HasFlashlight && HeadLight.enabled)
+        {
+            HeadLight.enabled = false;
+        }
+        if (BatteryLife <= 0)
+        {
+            BatteryLife = 0;
+            HeadLight.enabled = false;
+        }
+    }
+}
+
+## 9. Go back to unity and Make a  Gameobject and place it on the player in the middle and call it HeadLampMount. Add a flashlight to the headlampmout and make it children with it. 
+
+## 10. Go to tag and make a tag called Headlamp and tag it to HeadlampMount. 
+
+
+## 11. Now pressing play in the sence the player will be able to pick up the the flashlight and the battery as the player does this pressing E will turn the flashlight on and off draining the battery. 
+
+
+
+
+
+
+
+
+
+
+

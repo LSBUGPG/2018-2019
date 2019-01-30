@@ -1,0 +1,173 @@
+# First person look tutorial
+
+This is a better first person look controller 
+
+## 1. create a new scene (make a floor with a object) 
+
+## 2. create an empty gameobject rename it to player and add component character controller. 
+
+## 3. Then add a camara to the player by right clicking on player and renaming it Playercamera. Then on the y axes put in 0.9 to shift the camera up.
+
+## 4. Then make a scrpit and call it PlayerMove. Add that scrpit to the camara thats attached to the player. 
+
+## 5. For the scprit add this 
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerLook : MonoBehaviour
+{
+    [SerializeField] private string mouseXInputName, mouseYInputName;
+    [SerializeField] private float mouseSensitivity;
+
+
+    private void Awake()
+    {
+        LockCursor();
+      
+    }
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void Update()
+    {
+        CameraRotation();
+    }
+    private void CameraRotation()
+    {
+        float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis(mouseYInputName) * mouseSensitivity * Time.deltaTime;
+
+        transform.Rotate(-transform.right * mouseY);
+    }
+}
+
+with this scipt go back to unity go to the camera inspector now there will be mouse x input name/ mouse input y and mouse sensitivity 
+
+(to find out the names for these in unity go to edit, project settings and input to mouse x and mouse y names) 
+
+in mouse x input name put Mouse X 
+
+in mouse y input name put Mouse y 
+
+For mouse sensitivity put in 150 
+
+Now the script will let the player look up and down but does not stop and flips upside down. 
+
+
+## 6.  So we want to stop this and make the player look up and stop and down then stop. For this we need to add in xAxisClamp in the script like this. 
+
+
+
+public class PlayerLook : MonoBehaviour
+{
+    [SerializeField] private string mouseXInputName, mouseYInputName;
+    [SerializeField] private float mouseSensitivity;
+ 
+    private float xAxisClamp;
+    private void Awake()
+    {
+        LockCursor();
+        xAxisClamp = 0.0f;
+    }
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void Update()
+    {
+        CameraRotation();
+    }
+    private void CameraRotation()
+    {
+        float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis(mouseYInputName) * mouseSensitivity * Time.deltaTime;
+        xAxisClamp += mouseY;
+        if (xAxisClamp > 90.0f)
+        {
+            xAxisClamp = 90.0f;
+            mouseY = 0.0f;
+            ClampXAxisRotationToValue(270.0f);
+        }
+        else if (xAxisClamp < -90.0f)
+        {
+            xAxisClamp = -90.0f;
+            mouseY = 0.0f;
+            ClampXAxisRotationToValue(90.0f);
+        }
+        transform.Rotate(Vector3.left * mouseY);
+        
+    }
+    private void ClampXAxisRotationToValue(float value)
+    {
+        Vector3 eulerRotation = transform.eulerAngles;
+        eulerRotation.x = value;
+        transform.eulerAngles = eulerRotation;
+    }
+}  
+
+
+## 7. Now the camera stops if you look too far up and too far down stoping the flipping. But now I want the camera to also look side to side using
+
+[SerializeField] private Transform playerBody;
+
+playerBody.Rotate(Vector3.up * mouseX);
+
+
+public class PlayerLook : MonoBehaviour
+{
+    [SerializeField] private string mouseXInputName, mouseYInputName;
+    [SerializeField] private float mouseSensitivity;
+    [SerializeField] private Transform playerBody;
+    private float xAxisClamp;
+    private void Awake()
+    {
+        LockCursor();
+        xAxisClamp = 0.0f;
+    }
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void Update()
+    {
+        CameraRotation();
+    }
+    private void CameraRotation()
+    {
+        float mouseX = Input.GetAxis(mouseXInputName) * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis(mouseYInputName) * mouseSensitivity * Time.deltaTime;
+        xAxisClamp += mouseY;
+        if (xAxisClamp > 90.0f)
+        {
+            xAxisClamp = 90.0f;
+            mouseY = 0.0f;
+            ClampXAxisRotationToValue(270.0f);
+        }
+        else if (xAxisClamp < -90.0f)
+        {
+            xAxisClamp = -90.0f;
+            mouseY = 0.0f;
+            ClampXAxisRotationToValue(90.0f);
+        }
+        transform.Rotate(Vector3.left * mouseY);
+        playerBody.Rotate(Vector3.up * mouseX);
+    }
+    private void ClampXAxisRotationToValue(float value)
+    {
+        Vector3 eulerRotation = transform.eulerAngles;
+        eulerRotation.x = value;
+        transform.eulerAngles = eulerRotation;
+    }
+}
+
+
+## 8. Go go back to unity look in the playerlook script in the inspector, there now will be Player Body under mouse sensitivity. Click and drag the player into Player body.
+
+Now it should work.  
+
+
+
+

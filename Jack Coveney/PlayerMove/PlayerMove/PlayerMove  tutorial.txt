@@ -1,0 +1,156 @@
+# PlayerMove  tutorial
+
+This shows how to make a better player movement scrpit 
+
+## 1. create a new scene (make a floor with a object) 
+
+## 2. create an empty gameobject rename it to player and add component character controller. 
+
+## 3. Then add a camara to the player by right clicking on player and renaming it Playercamera. Then on the y axes put in 0.9 to shift the camera up. Use the Playerlook scrip for the player to look.  
+
+## 4. Then make a scrpit and call it PlayerMove. Add that scrpit to the player. 
+
+## 5. For the scprit add this 
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMove : MonoBehaviour
+{
+    [SerializeField] private string horizontalInputName;
+    [SerializeField] private string verticalInputName;
+    [SerializeField] private float movementSpeed;
+
+    private CharacterController charController;
+
+
+    private bool isJumping;
+
+    private void Awake()
+    {
+        charController = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        PlayerMovement();
+    }
+    private void PlayerMovement()
+    {
+        float horizInput = Input.GetAxis(horizontalInputName) * movementSpeed;
+        float vertInput = Input.GetAxis(verticalInputName) * movementSpeed;
+
+        Vector3 forwardMovement = transform.forward * vertInput;
+        Vector3 rightMovement = transform.right * horizInput;
+
+        charController.SimpleMove(forwardMovement + rightMovement);
+
+        
+
+    }
+
+  
+    }
+
+## 6. Back in unity look at the player inspector to the PlayerMove script it will have horizontal input name, vertical input name and movement speed 
+
+set Horizontal input name : Horizontal
+    Vertical input name   : Vertical
+
+    and set movemnt speed to 6 
+
+## 7. Another part is adding jumping to the script by adding 
+
+    [SerializeField] private AnimationCurve jumpFallOff;
+    [SerializeField] private float jumpMultiplier;
+    [SerializeField] private KeyCode jumpKey; 
+
+
+then the full script 
+
+
+public class PlayerMove : MonoBehaviour
+{
+    [SerializeField] private string horizontalInputName;
+    [SerializeField] private string verticalInputName;
+    [SerializeField] private float movementSpeed;
+
+    private CharacterController charController;
+
+    [SerializeField] private AnimationCurve jumpFallOff;
+    [SerializeField] private float jumpMultiplier;
+    [SerializeField] private KeyCode jumpKey;
+
+    private bool isJumping;
+
+    private void Awake()
+    {
+        charController = GetComponent<CharacterController>();
+    }
+
+    private void Update()
+    {
+        PlayerMovement();
+    }
+
+    private void PlayerMovement()
+    {
+        float horizInput = Input.GetAxis(horizontalInputName) * movementSpeed;
+        float vertInput = Input.GetAxis(verticalInputName) * movementSpeed;
+
+        Vector3 forwardMovement = transform.forward * vertInput;
+        Vector3 rightMovement = transform.right * horizInput;
+
+        charController.SimpleMove(forwardMovement + rightMovement);
+
+        JumpInput();
+
+    }
+
+    private void JumpInput()
+    {
+        if (Input.GetKeyDown(jumpKey) && !isJumping)
+        {
+            isJumping = true;
+            StartCoroutine(JumpEvent());
+        }
+    }
+
+    private IEnumerator JumpEvent()
+    {
+        charController.slopeLimit = 90.0f;
+        float timeInAir = 0.0f;
+
+        do
+        {
+            float jumpForce = jumpFallOff.Evaluate(timeInAir);
+            charController.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
+            timeInAir += Time.deltaTime;
+            yield return null;
+        } while (!charController.isGrounded && charController.collisionFlags != CollisionFlags.Above);
+
+        charController.slopeLimit = 45.0f;
+        isJumping = false;
+    
+    }
+}
+
+
+##8. Then going back to unity you will see Jump fall off, Jump Multplier and Jump Key added to the player move script. 
+
+to make this work select the boc next to the jump fall off and click one of the presets at the bottom and bring the left side to the top and the one on the right top to the bottom.
+
+then set the Jump Multplier to 10 
+
+Then set the Jump to space. By clicking on the box next to it and finding space. 
+
+Then that should work. 
+
+
+
+
+
+
+
+

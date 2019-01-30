@@ -1,0 +1,8 @@
+Journal
+
+19/11/18
+
+This script i wanted to make was a pick up an object script for use for my game. Using it to pick up an object to use. I looked at a few pick up tutorials but had problems finding one to follow that worked. 
+I had problems finding one which then worked as well. Ones i cam across was pick up and drag ones, but for some reason i could not get them to work and had problems with getting object to move . 
+But then i came across a way to make one work in unity and really helped me. 
+Having one where the player can walk into an object and pick it up. 

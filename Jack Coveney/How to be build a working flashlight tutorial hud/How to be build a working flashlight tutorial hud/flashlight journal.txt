@@ -1,0 +1,15 @@
+Journal
+
+4/12/18
+
+This script i wanted to make a hud which could go along with my flashlight for my game. Using the other scripts like the pick up , move and looking scpits. 
+so the hud can tell the player how many batterys they have and have a meter telling tha player how much battery they have left in flashlight from 100.
+The meter weill drain as the player useses the flashlight. 
+
+
+I had touble finding a good tutorial on how to make this work in unity. After long time i found a really useful one which worked for me. 
+
+I found this one to be very challanging but after i found how to make this work in the my scirpt worked perfectly. 
+
+I am very happy at the end result and works really well with the flashlight in the game. 
+ 

@@ -1,0 +1,10 @@
+Programming Task Log
+
+Date | Start | End | Interruptions | Time (H) | Task
+-----|-------|-----|---------------|----------|-----
+29/10/18 | 12:10 | 13:00 | - | 0.00 | tutorial
+29/10/18 | 13:05 | 13:30 | - | 0.20 | Create look project
+29/10/18 | 14:00 | 14:36 | - | 0.10 | wiritng code
+30/10/18 | 19:46 | 19:54 | - | 0.00 | Test the code
+30/10/18 | 20:45 | 21:00 | - | 0.30 | Write up tutorial
+
