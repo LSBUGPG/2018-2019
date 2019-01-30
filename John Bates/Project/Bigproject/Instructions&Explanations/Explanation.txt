@@ -1,0 +1,1 @@
+Rather then me making a tutorial again I thought it might just be better if I explain what is in  the project here as I have explained how to make everyone of these scripts in their own projects that I have in the same Zip file and explaining the same thing again can be quite pointless as this in a way a happy little accident. So the project is all of the scripts added into one. 

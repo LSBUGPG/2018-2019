@@ -1,0 +1,9 @@
+Length that each script
+
+Rotation = 10 minutes
+
+movement = 40 minutes
+
+Colourchange = 15 minutes
+
+Camera = 40 minutes 
