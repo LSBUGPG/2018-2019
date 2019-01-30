@@ -1,0 +1,39 @@
+# Move tutorial
+
+This shows how to create a character controller.
+
+## 1. Create a new scene. 
+
+
+## 2. Go to gameobject then 3d object and selected a cube. Then do that again and instead selected a plane and scale it up. 
+
+Make the cube sit on top of the plane. 
+
+## 3. Click on the cube and add a component, go to physics rigid body. 
+
+next is to add a script. Again add a component select script(C#) and name it Move. 
+
+## 4. Once opened delete at the top -
+
+// Use this for initialization
+	void Start () {
+
+
+and put 
+
+  public float speed = 10.0f;
+    public float rotationSpeed = 100.0f;
+
+## 5 Then under void add 
+
+ float translation = Input.GetAxis ("Vertical") * speed;
+        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+        translation *= Time.deltaTime;
+        rotation *= Time.deltaTime;
+        transform.Translate(0, 0, translation);
+        transform.Rotate(0, rotation, 0);
+	}
+}
+
+	
+## 5. Now switch back to the Unity and W and S is to move, A and D is to turn around.

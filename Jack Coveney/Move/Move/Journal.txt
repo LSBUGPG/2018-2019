@@ -1,0 +1,5 @@
+Journal
+
+21/10/18
+
+looked at a few turtrals on how to use sciprts to make charactor controls. Also learn how to make an object a character then add a rigidbody control it in 3d instead of 2d. 
