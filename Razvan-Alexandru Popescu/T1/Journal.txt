@@ -1,0 +1,8 @@
+September 20, 2018 12:30 PM
+
+After creating the scene in unity, I hit a roadlock when writing the script for the player movement, as i did not know how to make the jump move in any direction when the playable character was in the air. When the character began moving in a direction and the jump, it stayed in that line of direction, as I was not able to make the character switch direction. It would stay on the same path when the playable character moved and jumped.
+
+
+September 20, 2018 12:40 PM
+
+I finished the script and then attached it to the playable character to make sure it worked. I the realised that I forgot to make adjustments to the camera, so that it would look at the scene instead of the wall (derp moment).

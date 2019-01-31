@@ -1,0 +1,25 @@
+November 29, 2018
+
+I have started creating my project. I will be using 3 of my tutorials and combine them into one.
+The 3 behaviours that I will be using are:
+-movement;
+-health bar and damage;
+-enemyAI follows player.
+
+I began by adding the following game objects to my scene:
+- a floor;
+- a cube that is named "AiEnemy";
+- a capsule that is named "Player";
+- a 'Canvas' (which is an UI game object), then I attached a "UI Image" named 'BackGround' and in 'BackGround' I attached another "UI Image" and a "UI Text" which I named "HPbar" and "ratiotext";
+- an empty "Game object" which I named "NavMesh" (to know more about the NavMesh, check "Tutorial04" as it will explain about NavMesh);
+
+For the 'floor', 'cube' and 'capsule' I added a different color material for each of them so I know where is what.
+
+For the cube (named "Player") I also attached the camera to it in 3rd person so that it moves with the "Player". Then I began adding a 'Character controller', created 2 scripts that will be attached to the "Player", the "Movement script" and "Health Bar script" and changed the tag in 'Inspector' to 'Player'.
+Instructions on the two scripts can be found in "Tutorial01" and "Tutorial03".
+
+For the 'Canvas' (which is the health bar) instructions for it can be found in "Tutorial03"
+
+For the cube (named 'AiEnemy') I attached two scripts named 'Damage' and 'EnemyAI' (instructions on how to make them can be found in "Tutorial03" and "Tutorial04"), checked the 'Is Trigger' box in the 'Box Collider' and added a 'Nav Mesh Agent' ("Tutorial04" provides more info about 'NavMesh').
+
+Writing the behaviours has been fun and learned in the process how some of the more complicated stuff works. These behaviours will definetly come in handy for me in the near future.

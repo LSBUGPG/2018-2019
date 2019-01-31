@@ -1,0 +1,65 @@
+Spawning and destroying objects tutorial
+
+1) Create a new scene. Then create a cube (which will be renamed as 'platform'), making sure that  it's position on the XYZ axis is 0,0,0. The other thing that needs to be done to this platform is to scale it on the X and Z axis (begin at scale 10 on those axis). Make sure that the 'platform' has a box collider component attached to it, so that the game physics will work.
+
+The next to do is to add a 3D ojject to the game (a cylinder for now). Add a material to the cylinder to distinguish it from the platform. Once that is done, add the cylinder from hierarchy to the 'assets' project folder, then delete the cylinder from the hierarchy.
+
+The last 2 objects to be added to the scene are 2 'Empty objects'. One will be named 'spawn' and the other one will be named 'destroy'.
+'Spawn' can be placed anywhere on the Y axis, so long that it stays above the 'platform' (for now let's have it placed on Y=10) and the numbers on the X and Z axis will remain  on 0.
+'Destroy' will be the opposite, it will be placed below the 'platform' on the Y axis (for now Y=-10), X and Z will remain on 0. Add a box collider to it and the modify it's scale numbers on the X and Z axis (for the moment both values will be 20). 
+
+The last thing you need to do is to position the 'main camera' to the following position, rotation and scale numbers:
+-position: 0, 5, -11;
+-rotation: 15, 0, 0;
+-scale: 1, 1, 1
+
+2) Create 2 scripts, one called 'Spawn script' and the other one 'Destroy script'.
+The 'Spawn script' will be used to spawn in the gae object (in our case the 'cylinder').
+The first 2 lines of script are used to identify the spawn position and what object spawns (in our case we can name them 'spawnPosition' and 'spawnObject'):
+
+| public Transform spawnPosition; |
+| public GameObject spawnObject;  | 
+
+The next line will be placed in 'void Update'. This next coding line will allow us to press a button ( in our case 'left mouse button') and spawn in the game object with the help if an if statement and an 'Instantiate' function:
+
+|  if (Input.GetMouseButton()0)                                                  |
+|    Instantiate (spawnObject, spawnPosition.position, spawnPosition.rotation);  |
+
+This script will now be attached to the 'Main Camera', as we don't have proper 'Character Controller'. Once attached, in the 'Main Camera' inspector, the script will now have 'spawnPosition' and 'spawnObject' empty. For 'spawnPosition' click and drag the 'Spawn' empty object and for 'spawnObject' click and drag the 'Cylinder' game object.
+
+The 'Destroy script' will be used to destroy the game object.
+The first line will be a float function followed by 'lifeTime' (useful for making an object disasppear from the scene anfter a certain amount of time):
+
+| public float lifeTime = 13f; |
+
+Next lines come in 'void Update'. Firstly we add an 'if' statement, declaring that if 'lifeTime' in greater than 0, then 'lifeTime' is -= to 'Time.deltaTime', followed by another 'if' statement, tellling tha if 'lifeTime' is less or equal to 0, then the game object will be destroyed: 
+
+
+| if (lifeTime > 0) {             |
+|    lifeTime -= Time.deltaTime;  |
+|	if (lifeTime <=0) {       |
+|		Destruction ();   |
+
+The next line is another 'if' statement, telling that if the game object is to fall below a certain number, then it will be destroyed:
+
+|   if (this.transform.position.y <= -15) {  |
+|			Destruction ();      |
+
+
+Now we need to add 'void OnCollisionEnter' and a 'void Destruction' to make sure that the game objects are to be destroyed:
+
+|   void OnCollisionEnter(Collision cool) {          |
+|	if (cool.gameObject.name == "destroyer") {   |
+|		Destruction ();                      |
+|	}                                            |
+|   }                                                |
+|                                                    |
+|    void Destruction () {                           |
+|	Destroy(this.gameObject);                    |
+|     }                                              |
+|   }                                                |
+
+This script will be attached to the 'Cylinder' game object.
+
+
+After all the steps are done, now test your scene to make sure that the game object are spawning and and then destroyed either by falling or waiting on the time to make it disappear.

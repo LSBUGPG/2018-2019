@@ -1,0 +1,7 @@
+November 9, 2018
+
+Creating the scripts was a lot more challenging than I originally realised. All the credits for making the scripts goes to the person who made the video tutorial, he really knows his stuff.
+
+https://www.youtube.com/watch?v=9W0xLonwbLo&t=124s
+
+Ops, forgot to switch the tag to 'player'. The damn scripts and triggers were not working.

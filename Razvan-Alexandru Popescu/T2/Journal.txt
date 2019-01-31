@@ -1,0 +1,3 @@
+November 2nd, 2018
+
+I started to make the scripts for spawning objects and destroyong them. With a bit of guidance thanks to tutorials and materials found on the internet, the spawn script was done. However, the next script was a bit more diffcult.Following the same train of though and looking on the internet, it offered the solution, but not in the way I though it would, as the script has some lines that I will need to both remember and ask just how exactly it all made sens (I do get the why it works, just need to learn the code lines from an experienced person in coding, be it my colleagues or my tutors).

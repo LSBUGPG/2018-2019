@@ -1,0 +1,78 @@
+Tutorial for creating a non-playable character AI
+
+1)Creating the scene
+
+For your scene, you will need the following:
+- a plane (stretch it so it will contain all of the visible assets);
+- a capsule which will be renamed to 'Player';
+- a cube which will be renamed 'Enemy';
+- an empty game objects which will be renamed 'NavMesh'.
+Add materials for the plane, 'Player' and 'Enemy' so that each one will be visible in the 'main camera'.
+
+Before proceeding to creating the scripts, you will need to add a folder called "NavMeshComponents" into your "Assets" folder. This folder can be foundin the following link on GitHub (https://github.com/Unity-Technologies/NavMeshComponents), download it and then copy the "NavMeshComponents" folder and add it into your current Unity project in the "Assets" folder. We need this folder as it contains some specific components that are not supplied in the standard Unity.
+
+2)Creating the scripts
+
+The first script will be named 'Move'.
+
+The first 3 lines of script will be "private float" lines, for the speed, jump and gravity of the 'Player':
+
+| public class Move : MonoBehaviour { |
+|	                                  |
+|	 private float speed = 'a'f;      |
+|	 private float jump = 'b'f;       |
+|	 private float gravity = 'c'f;    |
+
+The 'a', 'b', and 'c' values can be changed at any time.
+Next line of coding will be:
+
+|        private Vector3 'name-the-movement' = Vector3.zero; |
+Useful to define how the 'Player' will move.
+
+Next line of code will be in 'void Update', adding a 'CharacterController':
+
+|       CharacterController 'control-name' = gameObject.GetComponent<CharacterController> ();  |
+
+After that, we will need 2 "if" statements:
+
+| if ('control-name'.isGrounded) {                                                                      |
+|	'name-the-movement' = new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  |
+|	'name-the-movement' = transform.TransformDirection ('name-the-movement');                       |
+|	'name-the-movement' *= speed;                                                                   |
+|                                                                                                       |
+| if (Input.GetButtonDown ("Jump")) {                                                                   |
+|		'name-the-movement'.y = jump;                                                           |
+|		}                                                                                       |
+|	}                                                                                               |
+
+And the last line of coding involves a "Time.deltaTime" line:
+
+| 'name-the-movement'.y -= gravity * Time.deltaTime;                      |
+|	     'control-name'.Move ('name-the-movement' * Time.deltaTime);  |
+|                                                                         |
+|	}                                                                 |
+| }                                                                       |
+Attach the script to "Player", then add a "CharacterController" component to "Player" to make sure that the script works.
+
+
+
+The second script will be named EnemyAI.
+You will need to add in the script a "using UnityEngine.AI;", so that it knows that we need AI.
+This script only needs 2 lines of code: the first one is a "public GameObject Player;" for our playable character to be recognized in the script and the second line involves the use of "game.Object":
+
+|  gameObject.GetComponent<NavMeshAgent> ().SetDestination(Player.transform.position);   |
+
+The "NavMesh Agent" is a component attached to a mobile character. You will need to add this component to 'Enemy' in 'Inspector'.
+"SetDestination" is used in our case so that 'Enemy' will follow 'Player'.
+ Attach the script to 'Enemy' and then drag the 'Player' asset into the script in 'Inspector'.
+
+3) For our empty game objects which we have named it 'NavMesh', if you have added the "NavMeshComponents" into your project, then you can add a component called "Nav Mesh Surface" (represents the walkable area for a specific "NavMesh Agent" type). In the "Nav Mesh Surface", go to 'Advanced' and click on "Bake" (it essentially map out the are and locate the 'Player').
+
+
+If everything is done correctly, then you should have 'Player' being chased by 'Enemy'.
+
+
+
+
+
+

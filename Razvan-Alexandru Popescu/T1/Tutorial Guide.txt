@@ -1,0 +1,79 @@
+Movement and Collision project tutorial
+
+1. Create a new scene
+
+Start by creating a new scene in Unity.
+Add 3 3D Objects (Cubes). One cube will be named "Floor", 2nd cube will be named "Wall" and the 3rd cube will be named "Player". 
+
+The "Floor" will have the following position and scale numbers:
+-position X=0, Y=0, Z=0;
+-scale X=30 Y=1 Z=30;
+
+The "Wall" will have the following position and scale numbers:
+-position X=-5.2 Y=4.5 Z=16;
+-scale X=2, Y=10, Z=25;
+
+The "Player" will be set at any position above the "Floor" as long as the 2 objects are not making contact when creating the scene. The scaling has to be a minimum of 1 on the XYZ axis.
+
+Make a new "Grey" material and drag it onto the "Floor", make a new "Brown" material and drag it onto the "Wall", and finally make a new "Blue" material and drag it onto the "Player".
+
+2. Create a new script called "MoveJump".
+This script will contain the "Player" movement and jumping.
+The first 3 lines of script will be "private float" lines. Each one of these lines perform a different mechanic for the "Player". First "private float" line will be followed by speed, second "private float" line will have jump and the third "private float" line will have gravity:
+
+| public class MoveJump : MonoBehaviour { |
+|	                                  |
+|	 private float speed = 'a'f;      |
+|	 private float jump = 'b'f;       |
+|	 private float gravity = 'c'f;    |
+
+You can decide the values for speed, jump and gravity ('a', 'b', and 'c').
+The next line is a "private Vector3 'name-the-movement' = Vector3.zero;".
+
+| public class MoveJump : MonoBehaviour {                    |
+|	                                                     |
+|	 private float speed = 'a'f;                         |
+|	 private float jump = 'b'f;                          |
+|	 private float gravity = 'c'f;                       |
+|        private Vector3 'name-the-movement' = Vector3.zero; |
+
+"Vector3.zero" is a summary for "Vector3(0, 0, 0)", in which the 0's are the movements on the XYZ axis.
+
+In 'void Update' now add  "CharacterController" line (it allows for a more easy movement with collisions without using a rigidbody), followed by a "gameObject.GetComponent<CharacterController> ()":
+
+| void Update () {                                                                             |
+|                                                                                              |
+|       CharacterController 'control-name' = gameObject.GetComponent<CharacterController> ();  |
+
+
+The next line will be a "if" statement followed by "'control-name'.isGrounded" (isGrounded refers to the last time the CharacterController touched the ground). Then you will need to have 3 lines for 'name-the-movement', one line is equal to speed, another line is equal to "transform.TransformDirection (name-the-movement);" and the 3rd line will have "new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));":
+
+| if ('control-name'.isGrounded) {                                                                      |
+|	'name-the-movement' = new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));  |
+|	'name-the-movement' = transform.TransformDirection ('name-the-movement');                       |
+|	'name-the-movement' *= speed;                                                                   |
+
+
+Now add another "if" statement followed by a "Input.GetButtonDown" ("Jump") line (usefull when making a jumping script line), then "'name-the-movement'.y" is equal to jump.
+
+| if (Input.GetButtonDown ("Jump")) {         |
+|		'name-the-movement'.y = jump; |
+|		}                             |
+|	}                                     |
+
+The last lines involves 'name-the-movement' and 'control-name', each one will contain a "Time.deltaTime" line (it signifies the time and the time it took for the information to be completed in Unity):
+
+| 'name-the-movement'.y -= gravity * Time.deltaTime;                      |
+|	     'control-name'.Move ('name-the-movement' * Time.deltaTime);  |
+|                                                                         |
+|	}                                                                 |
+| }                                                                       |
+
+
+
+3. Attach the script to "Player", then you need to add a "CharacterController" component to "Player" to make sure that the script works. In "CharacterController" component there are values called 'radius' and 'height'. Modify these values so that it fits the "Player" model.
+
+
+
+
+After all of this is done, test the scene, modifying the numbers in the script to see the differences in movement and jumping

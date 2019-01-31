@@ -1,0 +1,75 @@
+Tutorial for health bar UI and taking damage
+
+1) Creating the scene
+
+For the scene, you will need to create and have the following elements:
+-a plane to move on;
+-a capsule (which is named 'Player');
+-a cube (which will be named 'Damage') that is stretched on the X and Z axis, scaling to be kept withn reasonable limits and rotated 90 degrees and place it in the plane with half of it's body when it's rotated 90 degrees;
+-a canvas (which will be used to make the health bar UI). The canvas will need a child attached to it, so right click on canvas, go to UI and add 'Image'. Rename 'Image' to 'Background', then for 'Background' add 1 UI 'Text' and 1 UI 'Image' , make sure that these are a child of 'Background'. The UI 'Image' will be renamed 'HPbar' and the UI 'Text' renamed as 'ratiotext'. Click on 'Background', go to inspector to 'Rect Transformer' a box above the word 'Anchors'. Once you have clicked on it, this setting will let you place the health bar (play with the Width and Height, Pos X, Y and Z to suit your needs), repeat the same for 'HPbar'(change the color to distinguish it) however, it must have the same measurements as 'Background' and for the 'Anchor' placement (the box you have clicked before), make sure you hold shift down and click the 'Middle left' setting. This will allow us to make the health bar go in only one direction when 'Player' takes damage. For 'ratiotext' , the 'Anchor' placement is stretched (bottom right in the box), write in the text '100%' and click on 'Best Fit' for a better look.
+
+2) For 'Damage', make sure that in 'Box Collider' has 'Is Trigger' checked out, change the layer to 'Ignore Raycast' (to make the 'Player' pass through it) and assign to it a material.
+Create a script that wiil be named "Damage". In this script, write the 2 following lines:
+
+	public bool damageToGive;
+	public float damage = 10;
+
+These 2 lines are for creating the damage for the 'Player' and how much damage it takes. For the next lines of code, delete 'Void Start' and 'Void Update' and replace it with:
+
+public void OnTriggerStay(Collider col) {
+		if (col.tag == "Player") {
+			col.SendMessage ((damageToGive) ? "TakeDamage" : "HealDamage", Time.deltaTime * damage);
+		}
+	}
+This is for what hapens when 'Players' stays in the trigger, it sends a message to deal damage in the time that 'Player' is in the trigger.
+Attach  this script to 'Damage' and when that is done, you should notice the "Damage To Give" box and check that out. It basically allows the trigger to do damage.
+
+3) For 'Player', add a 'Character controller', add a new material and change the 'Tag' to "Player".
+Now will create 2 scripts for 'Player', one named 'Movement' (check last tutorials for guidance on how to make the script) and the other one name it 'HealthBar'.
+For the 'HealthBar' script, before writing anything else, add this following line after the "using UnityEngine;" line:
+
+using UnityEngine.UI;
+
+It's to make the script know that were using UI. Next add the following lines:
+
+        public Image HPbar;
+	public Text ratiotext;
+
+	private float hitpoint = 100;
+	private float maxHitpoint = 100;
+
+The public lines will be used to drag and drop the images and text in the 'Inspector' (for HPbar drag 'HPbar' and for Ratiotext drag 'ratiotext'. This will happen later after the script is completed).
+The 2 'private float' are used to determine the hitpoints for our 'Player'.
+
+Delete 'Void Start' and 'Void Update'. Now add the following lines:
+
+	private void Start() {
+		
+		UpdateHeathbar ();
+
+	}
+
+	private void UpdateHeathbar() {
+
+		float ratio = hitpoint / maxHitpoint;
+		HPbar.rectTransform.localScale = new Vector3 (ratio, 1, 1);
+		ratiotext.text = (ratio*100).ToString("0") + '%';
+	}
+
+	private void TakeDamage(float damage) {
+
+		hitpoint -= damage;
+		if (hitpoint < 0) {
+			hitpoint = 0;
+			Debug.Log ("Dead!");
+		}
+
+		UpdateHeathbar ();
+	}
+
+The 'UpdateHeathbar()' lines are to update the UI when 'Player' takes damage.
+In 'private void UpdateHeathbar' the lines written are used to determine the position of our health bar and damage taken.
+In 'private void TakeDamage(float damage)', the lines written are used to tell that 'Player' takes damage to it's hitpoints.
+
+
+Once all these steps are done, the health bar UI is created and works perfectly.

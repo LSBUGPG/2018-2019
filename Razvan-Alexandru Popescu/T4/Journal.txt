@@ -1,0 +1,6 @@
+November 13, 2018
+
+Scripts were a lot easier than I thought.
+One thing that I had to do is to add a folder that contained NavMesh Components (to see the pathing of the player and objects) from GitHub. Here is the link:
+https://github.com/Unity-Technologies/NavMeshComponents
+How to have it in your actual project will be explained in the tutorial.
